@@ -17,35 +17,72 @@
 </head>
 <body>
   <main class="wrap">
-    <header class="nav"><div class="brand"><div class="logo">✦</div><span>BilimAI</span></div><span class="tag">BETA · Demo</span></header>
+    <header class="nav"><div class="brand"><div class="logo">✦</div><span>BilimAI</span></div><span class="tag">BETA · AI</span></header>
     <section class="hero"><div class="eyebrow">O‘rganishning yangi usuli</div><h1>Bilim olish endi <span class="gradient">osonroq.</span></h1><p>O‘zbek tilida savol ber, yangi narsalarni o‘rgan va bilimlaringni sinab ko‘r. Bu BilimAI loyihasining ilk sinov versiyasi.</p></section>
     <section class="chat" aria-label="BilimAI suhbat oynasi">
-      <div class="chathead"><div class="avatar">✦</div><div><strong>BilimAI yordamchi</strong><div class="online">● Demo rejimda ishlayapti</div></div></div>
+      <div class="chathead"><div class="avatar">✦</div><div><strong>BilimAI yordamchi</strong><div class="online">● AI serverga ulangan</div></div></div>
       <div class="messages" id="messages" aria-live="polite"><div class="bubble bot">Salom! 👋 Men BilimAI’ning dastlabki demo yordamchisiman.
 
 Menga Python, ingliz tili yoki kompyuter haqida savol berib ko‘r. Hozircha oldindan tayyorlangan savollarga javob bera olaman.</div></div>
-      <div class="compose"><form id="chatForm"><div class="inputrow"><input id="question" autocomplete="off" maxlength="500" placeholder="Savolingni shu yerga yoz..." aria-label="Savolingiz" required><button class="send" type="submit">Yuborish ↗</button></div></form><div class="quick"><button type="button" data-q="Python nima?">🐍 Python</button><button type="button" data-q="HTML nima?">🌐 HTML</button><button type="button" data-q="Present Simple ni tushuntir">📚 Ingliz tili</button><button type="button" data-q="Menga oson test ber">🧠 Test</button></div><p class="hint">Maslahat: tez boshlash uchun yuqoridagi mavzulardan birini tanla.</p></div>
+      <div class="compose"><form id="chatForm"><div class="inputrow"><input id="question" autocomplete="off" maxlength="1000" placeholder="Savolingni shu yerga yoz..." aria-label="Savolingiz" required><button class="send" type="submit">Yuborish ↗</button></div></form><div class="quick"><button type="button" data-q="Python nima?">🐍 Python</button><button type="button" data-q="HTML nima?">🌐 HTML</button><button type="button" data-q="Present Simple ni tushuntir">📚 Ingliz tili</button><button type="button" data-q="Menga oson test ber">🧠 Test</button></div><p class="hint">Maslahat: tez boshlash uchun yuqoridagi mavzulardan birini tanla.</p></div>
     </section>
     <section class="features"><article class="feature"><div class="emoji">📘</div><div><h3>Sodda tushuntirish</h3><p>Murakkab mavzularni kichik qadamlarga bo‘lib o‘rganishga mo‘ljallangan.</p></div></article><article class="feature"><div class="emoji">💻</div><div><h3>Dasturlash</h3><p>Python, HTML va boshqa texnologiyalarni o‘rganish uchun yordamchi.</p></div></article><article class="feature"><div class="emoji">🎯</div><div><h3>Amaliy mashq</h3><p>Qisqa savollar va mini-testlar bilan bilimingni tekshir.</p></div></article></section>
-    <footer class="foot"><strong>BilimAI</strong> — mustaqil o‘quv startapi.<br>Bu birinchi demo versiya; hali haqiqiy AI API ulanmagan.</footer>
+    <footer class="foot"><strong>BilimAI</strong> — mustaqil o‘quv startapi.<br>AI serveri Cloudflare Workers orqali ishlaydi. Javoblar uchun API sozlamasi talab qilinadi.</footer>
   </main>
   <script>
+    const API_URL = 'https://bilm-ai.nematjonovc10.workers.dev/';
     const messages = document.getElementById('messages');
     const input = document.getElementById('question');
     const form = document.getElementById('chatForm');
-    const answers = [
-      {keys:['python nima','python'], answer:'🐍 Python — o‘rganish nisbatan oson bo‘lgan dasturlash tili. U saytlar, avtomatlashtirish, ma’lumotlar tahlili va AI loyihalarida ishlatiladi.\n\nMisol:\nprint("Salom, dunyo!")\n\nBu kod ekranga Salom, dunyo! deb chiqaradi.'},
-      {keys:['html nima','html'], answer:'🌐 HTML — veb-sahifaning tuzilishini yaratadigan belgilash tili. Sarlavha uchun <h1>, matn uchun <p>, tugma uchun <button> ishlatiladi. HTML’ni CSS va JavaScript bilan birga ishlatamiz.'},
-      {keys:['present simple','ingliz','english'], answer:'📚 Present Simple odatlar va muntazam sodir bo‘ladigan ishlar uchun ishlatiladi.\n\nI play football. — Men futbol o‘ynayman.\nShe reads a book. — U kitob o‘qiydi.\n\nHe/She/It bilan odatda fe’lga -s yoki -es qo‘shiladi.'},
-      {keys:['test','savol ber'], answer:'🧠 Mini-test: HTML nimaga xizmat qiladi?\n\nA) Veb-sahifa tuzilishini yaratishga\nB) Faqat rasm chizishga\nC) Telefonni quvvatlashga\n\nJavobingni A, B yoki C qilib yoz!'},
-      {keys:['salom','assalomu'], answer:'Salom! 😊 Bugun nimani o‘rganamiz? Python, HTML yoki ingliz tili haqida savol berishing mumkin.'},
-      {keys:['ai nima','sun’iy intellekt','suniy intellekt'], answer:'✨ Sun’iy intellekt (AI) — matnni tushunish, savollarga javob berish yoki rasmlarni aniqlash kabi vazifalarni bajarishga o‘rgatilgan kompyuter tizimlari. BilimAI’ning keyingi bosqichida haqiqiy AI xizmatini ulashni rejalashtiramiz.'}
-    ];
-    function addBubble(text, type){const div=document.createElement('div');div.className='bubble '+type;div.textContent=text;messages.appendChild(div);messages.scrollTop=messages.scrollHeight;}
-    function reply(question){const q=question.toLowerCase();const found=answers.find(item=>item.keys.some(k=>q.includes(k)));return found?found.answer:'Yaxshi savol! 😊 Hozir men demo rejimdaman va faqat ayrim tayyor mavzularga javob bera olaman.\n\nSinab ko‘r: “Python nima?”, “HTML nima?”, “Present Simple ni tushuntir” yoki “Menga oson test ber”. Haqiqiy AI’ni ulash — loyihamizning keyingi bosqichi.';}
-    function ask(q){const clean=q.trim();if(!clean)return;addBubble(clean,'user');input.value='';setTimeout(()=>addBubble(reply(clean),'bot'),250);}
-    form.addEventListener('submit',e=>{e.preventDefault();ask(input.value);});
-    document.querySelectorAll('[data-q]').forEach(btn=>btn.addEventListener('click',()=>ask(btn.dataset.q)));
+    const sendButton = form.querySelector('.send');
+
+    function addBubble(text, type) {
+      const div = document.createElement('div');
+      div.className = 'bubble ' + type;
+      div.textContent = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div;
+    }
+
+    async function ask(question) {
+      const clean = String(question || '').trim();
+      if (!clean) return;
+      addBubble(clean, 'user');
+      input.value = '';
+      input.disabled = true;
+      sendButton.disabled = true;
+      sendButton.textContent = 'Kutilmoqda…';
+      const loading = addBubble('BilimAI javob tayyorlamoqda…', 'bot');
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: clean })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Server xatosi (' + response.status + ')');
+        loading.textContent = data.answer || 'Javob olinmadi. Qayta urinib ko‘r.';
+      } catch (error) {
+        loading.textContent = 'Ulanishda xatolik: ' + (error.message || 'Internetni tekshirib, qayta urinib ko‘r.');
+      } finally {
+        input.disabled = false;
+        sendButton.disabled = false;
+        sendButton.textContent = 'Yuborish ↗';
+        input.focus();
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      ask(input.value);
+    });
+
+    document.querySelectorAll('[data-q]').forEach(button => {
+      button.addEventListener('click', () => ask(button.dataset.q));
+    });
   </script>
 </body>
 </html>
