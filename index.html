@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="BilimAI — o‘zbek tilidagi o‘quv yordamchisi. Savol ber, o‘rgan va mashq qil.">
+  <title>BilimAI — O‘rganish osonroq</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1020;--panel:#131b2e;--line:#26334d;--text:#eef4ff;--muted:#a7b4cc;--accent:#7c5cff;--accent2:#28d7b0}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0%,#1d2850 0,transparent 45%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+    .wrap{max-width:960px;margin:auto;padding:22px 16px 48px}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:54px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#36c9da);font-size:22px}.tag{font-size:12px;color:#c5baff;border:1px solid #51447f;padding:7px 10px;border-radius:99px}
+    .hero{text-align:center;max-width:720px;margin:0 auto 32px}.eyebrow{color:var(--accent2);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}.hero h1{font-size:clamp(36px,7vw,62px);line-height:1.07;letter-spacing:-2px;margin:15px 0}.gradient{background:linear-gradient(90deg,#b5a5ff,#62e8d1);color:transparent;background-clip:text}.hero p{font-size:17px;color:var(--muted);line-height:1.7;margin:0 auto;max-width:590px}
+    .chat{max-width:720px;margin:auto;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:rgba(19,27,46,.94);box-shadow:0 24px 80px #0004}.chathead{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}.avatar{width:40px;height:40px;display:grid;place-items:center;border-radius:13px;background:#29264f;font-size:20px}.chathead strong{display:block}.online{font-size:12px;color:var(--accent2);margin-top:3px}.messages{padding:20px;min-height:220px;max-height:420px;overflow:auto;display:flex;flex-direction:column;gap:14px}.bubble{max-width:90%;padding:13px 15px;border-radius:16px;line-height:1.6;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}.bot{align-self:flex-start;background:#202b43;color:#e9efff;border-bottom-left-radius:5px}.user{align-self:flex-end;background:linear-gradient(135deg,#6548e8,#8064ff);border-bottom-right-radius:5px}.compose{padding:0 16px 16px}.inputrow{display:flex;gap:9px;background:#0e1526;border:1px solid #34415b;border-radius:16px;padding:8px}.inputrow input{min-width:0;flex:1;background:transparent;border:0;outline:none;color:var(--text);padding:10px;font:inherit}.send{border:0;border-radius:12px;background:var(--accent);color:white;font-weight:700;padding:0 18px;cursor:pointer}.send:active{transform:scale(.97)}.hint{font-size:12px;color:#8290aa;text-align:center;margin:10px 0 0}.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.quick button{background:#1a2439;border:1px solid #34415b;color:#d9e2f7;border-radius:99px;padding:9px 12px;cursor:pointer;font-size:12px}.quick button:hover{border-color:var(--accent)}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:850px;margin:28px auto}.feature{border:1px solid var(--line);background:#111a2cbb;border-radius:18px;padding:19px}.feature .emoji{font-size:24px}.feature h3{font-size:15px;margin:12px 0 7px}.feature p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}.foot{text-align:center;color:#73819b;font-size:12px;margin-top:32px;line-height:1.8}.foot strong{color:#a9b7d0}
+    @media(max-width:600px){.nav{margin-bottom:38px}.hero h1{letter-spacing:-1px}.hero p{font-size:15px}.features{grid-template-columns:1fr}.feature{display:flex;gap:13px;align-items:flex-start}.feature h3{margin-top:0}.feature .emoji{min-width:30px}.messages{padding:15px;min-height:200px}.bubble{max-width:96%}.chat{border-radius:19px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="nav"><div class="brand"><div class="logo">✦</div><span>BilimAI</span></div><span class="tag">BETA · Demo</span></header>
+    <section class="hero"><div class="eyebrow">O‘rganishning yangi usuli</div><h1>Bilim olish endi <span class="gradient">osonroq.</span></h1><p>O‘zbek tilida savol ber, yangi narsalarni o‘rgan va bilimlaringni sinab ko‘r. Bu BilimAI loyihasining ilk sinov versiyasi.</p></section>
+    <section class="chat" aria-label="BilimAI suhbat oynasi">
+      <div class="chathead"><div class="avatar">✦</div><div><strong>BilimAI yordamchi</strong><div class="online">● Demo rejimda ishlayapti</div></div></div>
+      <div class="messages" id="messages" aria-live="polite"><div class="bubble bot">Salom! 👋 Men BilimAI’ning dastlabki demo yordamchisiman.
+
+Menga Python, ingliz tili yoki kompyuter haqida savol berib ko‘r. Hozircha oldindan tayyorlangan savollarga javob bera olaman.</div></div>
+      <div class="compose"><form id="chatForm"><div class="inputrow"><input id="question" autocomplete="off" maxlength="500" placeholder="Savolingni shu yerga yoz..." aria-label="Savolingiz" required><button class="send" type="submit">Yuborish ↗</button></div></form><div class="quick"><button type="button" data-q="Python nima?">🐍 Python</button><button type="button" data-q="HTML nima?">🌐 HTML</button><button type="button" data-q="Present Simple ni tushuntir">📚 Ingliz tili</button><button type="button" data-q="Menga oson test ber">🧠 Test</button></div><p class="hint">Maslahat: tez boshlash uchun yuqoridagi mavzulardan birini tanla.</p></div>
+    </section>
+    <section class="features"><article class="feature"><div class="emoji">📘</div><div><h3>Sodda tushuntirish</h3><p>Murakkab mavzularni kichik qadamlarga bo‘lib o‘rganishga mo‘ljallangan.</p></div></article><article class="feature"><div class="emoji">💻</div><div><h3>Dasturlash</h3><p>Python, HTML va boshqa texnologiyalarni o‘rganish uchun yordamchi.</p></div></article><article class="feature"><div class="emoji">🎯</div><div><h3>Amaliy mashq</h3><p>Qisqa savollar va mini-testlar bilan bilimingni tekshir.</p></div></article></section>
+    <footer class="foot"><strong>BilimAI</strong> — mustaqil o‘quv startapi.<br>Bu birinchi demo versiya; hali haqiqiy AI API ulanmagan.</footer>
+  </main>
+  <script>
+    const messages = document.getElementById('messages');
+    const input = document.getElementById('question');
+    const form = document.getElementById('chatForm');
+    const answers = [
+      {keys:['python nima','python'], answer:'🐍 Python — o‘rganish nisbatan oson bo‘lgan dasturlash tili. U saytlar, avtomatlashtirish, ma’lumotlar tahlili va AI loyihalarida ishlatiladi.\n\nMisol:\nprint("Salom, dunyo!")\n\nBu kod ekranga Salom, dunyo! deb chiqaradi.'},
+      {keys:['html nima','html'], answer:'🌐 HTML — veb-sahifaning tuzilishini yaratadigan belgilash tili. Sarlavha uchun <h1>, matn uchun <p>, tugma uchun <button> ishlatiladi. HTML’ni CSS va JavaScript bilan birga ishlatamiz.'},
+      {keys:['present simple','ingliz','english'], answer:'📚 Present Simple odatlar va muntazam sodir bo‘ladigan ishlar uchun ishlatiladi.\n\nI play football. — Men futbol o‘ynayman.\nShe reads a book. — U kitob o‘qiydi.\n\nHe/She/It bilan odatda fe’lga -s yoki -es qo‘shiladi.'},
+      {keys:['test','savol ber'], answer:'🧠 Mini-test: HTML nimaga xizmat qiladi?\n\nA) Veb-sahifa tuzilishini yaratishga\nB) Faqat rasm chizishga\nC) Telefonni quvvatlashga\n\nJavobingni A, B yoki C qilib yoz!'},
+      {keys:['salom','assalomu'], answer:'Salom! 😊 Bugun nimani o‘rganamiz? Python, HTML yoki ingliz tili haqida savol berishing mumkin.'},
+      {keys:['ai nima','sun’iy intellekt','suniy intellekt'], answer:'✨ Sun’iy intellekt (AI) — matnni tushunish, savollarga javob berish yoki rasmlarni aniqlash kabi vazifalarni bajarishga o‘rgatilgan kompyuter tizimlari. BilimAI’ning keyingi bosqichida haqiqiy AI xizmatini ulashni rejalashtiramiz.'}
+    ];
+    function addBubble(text, type){const div=document.createElement('div');div.className='bubble '+type;div.textContent=text;messages.appendChild(div);messages.scrollTop=messages.scrollHeight;}
+    function reply(question){const q=question.toLowerCase();const found=answers.find(item=>item.keys.some(k=>q.includes(k)));return found?found.answer:'Yaxshi savol! 😊 Hozir men demo rejimdaman va faqat ayrim tayyor mavzularga javob bera olaman.\n\nSinab ko‘r: “Python nima?”, “HTML nima?”, “Present Simple ni tushuntir” yoki “Menga oson test ber”. Haqiqiy AI’ni ulash — loyihamizning keyingi bosqichi.';}
+    function ask(q){const clean=q.trim();if(!clean)return;addBubble(clean,'user');input.value='';setTimeout(()=>addBubble(reply(clean),'bot'),250);}
+    form.addEventListener('submit',e=>{e.preventDefault();ask(input.value);});
+    document.querySelectorAll('[data-q]').forEach(btn=>btn.addEventListener('click',()=>ask(btn.dataset.q)));
+  </script>
+</body>
+</html>
